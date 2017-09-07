@@ -17,7 +17,7 @@ In this project, I implemented a auto-complete search tools based on N-Gram mode
 
 Demo looks like
 
-![](http://ww1.sinaimg.cn/large/d8eb23c4gy1fjbs6t2z7fj219e10s7dz.jpg)
+![](http://omsd8hfm0.bkt.clouddn.com/Screen Shot 2017-09-07 at 16.00.32.png)
 
 ## Deploy
 First we need deploy a hadoop cluster on Docker, this cluster has one Masternode and two slavenodes. The whole project is based on the docker.

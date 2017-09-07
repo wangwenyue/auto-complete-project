@@ -25,7 +25,7 @@ public class NGramLibraryBuilder {
 			noGram = conf.getInt("noGram", 5);
 		}
 
-		// map method
+		
 		@Override
 		public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
 			
@@ -40,7 +40,7 @@ public class NGramLibraryBuilder {
 				return;
 			}
 			
-			//I love big data
+		
 			StringBuilder sb;
 			for(int i = 0; i < words.length-1; i++) {
 				sb = new StringBuilder();
@@ -55,7 +55,7 @@ public class NGramLibraryBuilder {
 	}
 
 	public static class NGramReducer extends Reducer<Text, IntWritable, Text, IntWritable> {
-		// reduce method
+		
 		@Override
 		public void reduce(Text key, Iterable<IntWritable> values, Context context)
 				throws IOException, InterruptedException {

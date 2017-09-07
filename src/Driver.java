@@ -19,13 +19,13 @@ public class Driver {
 		String inputDir = args[0];
 		String nGramLib = args[1];
 		String numberOfNGram = args[2];
-		String threshold = args[3];  //the word with frequency under threshold will be discarded
+		String threshold = args[3];  
 		String numberOfFollowingWords = args[4];
 
 		//job1
 		Configuration conf1 = new Configuration();
 
-		//Define the job to read data sentence by sentence
+		
 		conf1.set("textinputformat.record.delimiter", ".");
 		conf1.set("noGram", numberOfNGram);
 		
@@ -46,8 +46,7 @@ public class Driver {
 		TextOutputFormat.setOutputPath(job1, new Path(nGramLib));
 		job1.waitForCompletion(true);
 		
-		//how to connect two jobs?
-		// last output is second input
+		
 		
 		//2nd job
 		Configuration conf2 = new Configuration();
@@ -65,16 +64,11 @@ public class Driver {
 		job2.setJobName("Model");
 		job2.setJarByClass(Driver.class);
 
-		//How to add external dependency to current project?
-		/*
-		  1. upload dependency to hdfs
-		  2. use this "addArchiveToClassPath" method to define the dependency path on hdfs
-		 */
+	
 		job2.addArchiveToClassPath(new Path("/mysql/mysql-connector-java-5.1.39-bin.jar"));
 		///mysql/mysql-connector-java-5.1.39-bin.jar
 
-		//Why do we add map outputKey and outputValue?
-		//Because map output key and value are inconsistent with reducer output key and value
+		
 		job2.setMapOutputKeyClass(Text.class);
 		job2.setMapOutputValueClass(Text.class);
 		job2.setOutputKeyClass(DBOutputWritable.class);

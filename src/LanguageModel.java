@@ -21,7 +21,7 @@ public class LanguageModel {
 	public static class Map extends Mapper<LongWritable, Text, Text, Text> {
 
 		int threashold;
-		// get the threashold parameter from the configuration
+		
 		@Override
 		public void setup(Context context) {
 			Configuration conf = context.getConfiguration();
@@ -34,7 +34,7 @@ public class LanguageModel {
 			if((value == null) || (value.toString().trim()).length() == 0) {
 				return;
 			}
-			//this is cool\t20
+			
 			String line = value.toString().trim();
 			
 			String[] wordsPlusCount = line.split("\t");
@@ -49,7 +49,7 @@ public class LanguageModel {
 				return;
 			}
 			
-			//this is --> cool = 20
+			
 			StringBuilder sb = new StringBuilder();
 			for(int i = 0; i < words.length-1; i++) {
 				sb.append(words[i]).append(" ");
@@ -66,7 +66,7 @@ public class LanguageModel {
 	public static class Reduce extends Reducer<Text, Text, DBOutputWritable, NullWritable> {
 
 		int n;
-		// get the n parameter from the configuration
+		
 		@Override
 		public void setup(Context context) {
 			Configuration conf = context.getConfiguration();
@@ -76,7 +76,7 @@ public class LanguageModel {
 		@Override
 		public void reduce(Text key, Iterable<Text> values, Context context) throws IOException, InterruptedException {
 			
-			//this is, <girl = 50, boy = 60>
+			
 			TreeMap<Integer, List<String>> tm = new TreeMap<Integer, List<String>>(Collections.reverseOrder());
 			for(Text val: values) {
 				String curValue = val.toString().trim();
@@ -91,7 +91,7 @@ public class LanguageModel {
 					tm.put(count, list);
 				}
 			}
-			//<50, <girl, bird>> <60, <boy...>>
+			
 			Iterator<Integer> iter = tm.keySet().iterator();
 			for(int j=0; iter.hasNext() && j<n;) {
 				int keyCount = iter.next();
